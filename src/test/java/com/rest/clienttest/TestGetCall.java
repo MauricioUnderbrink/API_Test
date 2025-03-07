@@ -82,5 +82,28 @@ public class TestGetCall extends TestBase {
         Assert.assertEquals(firstPersonEmail, "janet.weaver@reqres.in");
     }
 
+    /**
+     * This test will get the data from the HTTPGet call and verify the third user's data
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testThirdIndex() throws IOException {
+        driver = new HTTPClientCalls();
+        apiResponse = driver.getCall(APIURI);
+        String responseString = EntityUtils.toString(apiResponse.getEntity(), "UTF-8");
+        JSONObject responseJson = new JSONObject(responseString);
+        String responseValue = TestUtils.getValueByJPath(responseJson, "/per_page");
+        Assert.assertEquals(responseValue, "6");
+        String id = TestUtils.getValueByJPath(responseJson, "/data[3]/id");
+        Assert.assertEquals(id, "4");
+        String firstPersonName = TestUtils.getValueByJPath(responseJson, "/data[3]/first_name");
+        Assert.assertEquals(firstPersonName, "Eve");
+        String firstPersonLastName = TestUtils.getValueByJPath(responseJson, "/data[3]/last_name");
+        Assert.assertEquals(firstPersonLastName, "Holt");
+        String firstPersonEmail = TestUtils.getValueByJPath(responseJson, "/data[3]/email");
+        Assert.assertEquals(firstPersonEmail, "eve.holt@reqres.in");
+    }
+
 
 }
