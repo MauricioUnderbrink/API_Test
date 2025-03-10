@@ -1,5 +1,8 @@
 package com.rest.base;
 
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -24,6 +27,7 @@ public class TestBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 }
